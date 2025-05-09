@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tsc && node dist/server.js",
     "build": "tsc && npm run copy-templates",
-  "copy-templates": "xcopy src\\templates dist\\templates /E /I /Y"
+    "copy-templates": "xcopy src\\templates dist\\templates /E /I /Y"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "@types/handlebars": "^4.0.40",
     "@types/node": "^22.15.14",
     "typescript": "^5.8.3"
   }

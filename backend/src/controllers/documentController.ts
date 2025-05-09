@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import generatePDF from '../utils/pdfGenerator';
+import path from 'path';
+import fs from 'fs';
+import Handlebars from 'handlebars';
 
 
 export const generateDocument= async (req: Request, res:Response):Promise<any> => {
@@ -22,4 +25,17 @@ export const generateDocument= async (req: Request, res:Response):Promise<any> =
     }
 }
 
+export const renderDocument= async (req:Request, res:Response):Promise<any> => {
+    try {
+        const {formData,templateName}=req.body;
+        const templatePath=path.join(__dirname,`../templates/${templateName}.hbs`);
+        const templateHtml=fs.readFileSync(templatePath,'utf8');
+        const template=Handlebars.compile(templateHtml);
+        const finalHtml= template(formData)
+        res.send(finalHtml);
+    } catch (error) {
+        console.error("Error rendering document",error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
 
