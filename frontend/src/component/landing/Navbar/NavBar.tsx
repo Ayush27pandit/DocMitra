@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { NavbarMenu } from "./data";
 import { SiMaterialformkdocs } from "react-icons/si";
-import { li } from "framer-motion/client";
 import { MdClose, MdMenu } from "react-icons/md";
 import { useState } from "react";
 import ResponsiveMenu from "./ResponsiveMenu";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
   return (
     <>
       <motion.div
@@ -41,10 +42,16 @@ function NavBar() {
           </div>
           {/* Cta button */}
           <div className="hidden lg:block space-x-6">
-            <button className="font-semibold hover:scale-103 hover:cursor-pointer hover:text-gray-600 transition-all duration-300 ease-in-out hover:underline">
+            <button
+              onClick={() => navigate("/auth")}
+              className="font-semibold hover:scale-103 hover:cursor-pointer hover:text-gray-600 transition-all duration-300 ease-in-out hover:underline"
+            >
               Sign-In
             </button>
-            <button className="text-white rounded-full  bg-secondary-200 font-semibold px-6 py-3 hover:scale-105 hover:bg-primary-p3 hover:text-black transition-all duration-300 ease-in-out shadow-lg hover:cursor-pointer hover">
+            <button
+              onClick={() => navigate("/auth")}
+              className="text-white rounded-full  bg-secondary-200 font-semibold px-6 py-3 hover:scale-105 hover:bg-primary-p3 hover:text-black transition-all duration-300 ease-in-out shadow-lg hover:cursor-pointer hover"
+            >
               Register
             </button>
           </div>

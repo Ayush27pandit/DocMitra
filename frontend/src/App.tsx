@@ -1,23 +1,31 @@
-import { LogoCarouselDemo } from "./component/landing/BrandStrip/BrandStrip";
-import Features from "./component/landing/Features/Features";
-import Hero from "./component/landing/Hero/Hero";
-import NavBar from "./component/landing/Navbar/NavBar";
-import NavbarBanner from "./component/landing/Navbar/NavbarBanner";
-import NumberCounterStrip from "./component/landing/NumberCounter/NumberCounter";
+// App.tsx
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LandingPage from "./component/landing/LandingPage";
+import AuthPage from "./pages/AuthPage";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoutes from "./component/ProtectedRoutes";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
+  {
+    path: "/auth",
+    element: <AuthPage />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoutes>
+        <Dashboard />
+      </ProtectedRoutes>
+    ),
+  },
+]);
 
 function App() {
-  return (
-    <main className="overflow-x-hidden ">
-      <div className="bg-primarybg-100">
-        <NavBar />
-        <NavbarBanner />
-        <Hero />
-      </div>
-      <NumberCounterStrip />
-      <LogoCarouselDemo />
-      <Features />
-    </main>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
